@@ -27,7 +27,7 @@ function App() {
   const fetchImages = async () => {
     try {
       const res = await axios.get(`${API_BASE}/images`);
-      setImages(res.data.images);
+      setImages(res.data?.images || []);
       setError('');
     } catch (err) {
       setError('Could not reach the API. Is the backend running on port 5000?');
@@ -139,7 +139,7 @@ function App() {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
               />
             </label>
             <button type="submit" className="btn-upload" disabled={!file || uploading}>
